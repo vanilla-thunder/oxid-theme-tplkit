@@ -1,0 +1,7 @@
+@import "node_modules/bootstrap/scss/_functions.scss";
+@import "node_modules/bootstrap/scss/_variables.scss";
+@import "node_modules/bootstrap/scss/_mixins.scss";
+
+#promoslider .carousel-caption {
+  background-color: rgba($secondary, .5);
+}

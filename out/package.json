@@ -1,0 +1,16 @@
+{
+  "name": "tpl-kit",
+  "version": "0.0.1",
+  "description": "",
+  "main": "build.js",
+  "scripts": {
+    "buid": "node build.js"
+  },
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "bootstrap": "^5.0.0-alpha1",
+    "node-sass": "^4.14.1",
+    "clean-css": "^4.2.3"
+  }
+}
