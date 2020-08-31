@@ -1,3 +1,6 @@
+[{if $oViewConf->getTopActionClassName() != 'clearcookies' && $oViewConf->getTopActionClassName() != 'mallstart'}]
+    [{oxid_include_widget cl="oxwCookieNote" _parent=$oView->getClassName() nocookie=1}]
+[{/if}]
 [{block name="header_main"}]
     <header id="header" class="shadow p-1 mb-4">
         <div class="container">
@@ -14,8 +17,39 @@
                     [{/block}]
                 </div>
                 <div class="col-md">
-                    [{block name="layout_header_search"}]
-                        [{include file="widget/header/search.tpl"}]
+                    [{block name="layout_header_right"}]
+                        <div class="menu-dropdowns pull-right">
+                            [{block name="dd_layout_page_header_icon_menu_languages"}]
+                                [{* Language Dropdown*}]
+                                [{oxid_include_widget cl="oxwLanguageList" lang=$oViewConf->getActLanguageId() _parent=$oView->getClassName() nocookie=1 _navurlparams=$oViewConf->getNavUrlParams() anid=$oViewConf->getActArticleId()}]
+                            [{/block}]
+                            [{block name="dd_layout_page_header_icon_menu_currencies"}]
+                                [{* Currency Dropdown*}]
+                                [{oxid_include_widget cl="oxwCurrencyList" cur=$oViewConf->getActCurrency() _parent=$oView->getClassName() nocookie=1 _navurlparams=$oViewConf->getNavUrlParams() anid=$oViewConf->getActArticleId()}]
+                            [{/block}]
+
+                            [{block name="dd_layout_page_header_icon_menu_account"}]
+                                [{if $oxcmp_user || $oView->getCompareItemCount() || $Errors.loginBoxErrors}]
+                                    [{assign var="blAnon" value=0}]
+                                    [{assign var="force_sid" value=$oViewConf->getSessionId()}]
+                                [{else}]
+                                    [{assign var="blAnon" value=1}]
+                                [{/if}]
+                                [{* Account Dropdown *}]
+                                [{oxid_include_widget cl="oxwServiceMenu" _parent=$oView->getClassName() force_sid=$force_sid nocookie=$blAnon _navurlparams=$oViewConf->getNavUrlParams() anid=$oViewConf->getActArticleId()}]
+                            [{/block}]
+
+                            [{block name="dd_layout_page_header_icon_menu_minibasket"}]
+                                [{* Minibasket Dropdown *}]
+                                [{if $oxcmp_basket->getProductsCount()}]
+                                    [{assign var="blAnon" value=0}]
+                                    [{assign var="force_sid" value=$oViewConf->getSessionId()}]
+                                [{else}]
+                                    [{assign var="blAnon" value=1}]
+                                [{/if}]
+                                [{oxid_include_widget cl="oxwMiniBasket" nocookie=$blAnon force_sid=$force_sid}]
+                            [{/block}]
+                        </div>
                     [{/block}]
                 </div>
             </div>
@@ -50,40 +84,11 @@
                                 [{/block}]
 
                             </ul>
-
-
-                            <div class="menu-dropdowns pull-right">
-                                [{block name="dd_layout_page_header_icon_menu_languages"}]
-                                    [{* Language Dropdown*}]
-                                    [{oxid_include_widget cl="oxwLanguageList" lang=$oViewConf->getActLanguageId() _parent=$oView->getClassName() nocookie=1 _navurlparams=$oViewConf->getNavUrlParams() anid=$oViewConf->getActArticleId()}]
+                            <form class="d-flex">
+                                [{block name="layout_header_right"}]
+                                    [{include file="widget/header/search.tpl"}]
                                 [{/block}]
-                                [{block name="dd_layout_page_header_icon_menu_currencies"}]
-                                    [{* Currency Dropdown*}]
-                                    [{oxid_include_widget cl="oxwCurrencyList" cur=$oViewConf->getActCurrency() _parent=$oView->getClassName() nocookie=1 _navurlparams=$oViewConf->getNavUrlParams() anid=$oViewConf->getActArticleId()}]
-                                [{/block}]
-
-                                [{block name="dd_layout_page_header_icon_menu_account"}]
-                                    [{if $oxcmp_user || $oView->getCompareItemCount() || $Errors.loginBoxErrors}]
-                                        [{assign var="blAnon" value=0}]
-                                        [{assign var="force_sid" value=$oViewConf->getSessionId()}]
-                                    [{else}]
-                                        [{assign var="blAnon" value=1}]
-                                    [{/if}]
-                                    [{* Account Dropdown *}]
-                                    [{oxid_include_widget cl="oxwServiceMenu" _parent=$oView->getClassName() force_sid=$force_sid nocookie=$blAnon _navurlparams=$oViewConf->getNavUrlParams() anid=$oViewConf->getActArticleId()}]
-                                [{/block}]
-
-                                [{block name="dd_layout_page_header_icon_menu_minibasket"}]
-                                    [{* Minibasket Dropdown *}]
-                                    [{if $oxcmp_basket->getProductsCount()}]
-                                        [{assign var="blAnon" value=0}]
-                                        [{assign var="force_sid" value=$oViewConf->getSessionId()}]
-                                    [{else}]
-                                        [{assign var="blAnon" value=1}]
-                                    [{/if}]
-                                    [{oxid_include_widget cl="oxwMiniBasket" nocookie=$blAnon force_sid=$force_sid}]
-                                [{/block}]
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </nav>

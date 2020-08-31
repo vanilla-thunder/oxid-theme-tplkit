@@ -124,8 +124,8 @@
         [{$_block}]
     [{/foreach}]
 
-    [{if $oViewConf->getTopActiveClassName() == 'details' && $oView->showZoomPics()}]
-        [{include file="page/details/inc/photoswipe.tpl"}]
+    [{if $oViewConf->getTopActionClassName() != 'clearcookies' && $oViewConf->getTopActionClassName() != 'mallstart'}]
+        [{oxid_include_widget cl="oxwCookieNote" _parent=$oView->getClassName() nocookie=1}]
     [{/if}]
 
     [{block name="base_js"}]

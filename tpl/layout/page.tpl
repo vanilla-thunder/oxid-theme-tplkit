@@ -7,11 +7,9 @@
         [{include file="layout/header.tpl"}]
     [{/block}]
 
-    [{assign var="blFullwidth" value=$oViewConf->getViewThemeParam('blFullwidthLayout')}]
+    <div id="content">
 
-    <div id="content" [{if $sidebar}]class="sidebar[{$sidebar}]"[{/if}]>
-
-        <div class="[{if $blFullwidth}]container[{else}]container-fluid[{/if}]">
+        <div class="container">
 
             <div class="underdog">
 

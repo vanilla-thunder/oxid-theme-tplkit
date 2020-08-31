@@ -3,7 +3,7 @@
 $aTheme = array(
     'id'          => 'tpl-kit',
     'parentTheme' => 'wave',
-    'parentVersions' => array('1.3.1'),
+    'parentVersions' => array('1.4.0','1,4,1'),
     'title'       => 'Template Kit',
     'description' => 'Tempalte Kit is a configurable theme for OXID eShop v6, based on the CSS framework Bootstrap 5.',
     'thumbnail'   => 'theme.jpg',

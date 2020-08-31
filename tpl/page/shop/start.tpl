@@ -1,24 +1,21 @@
 [{capture append="oxidBlock_content"}]
     [{assign var='rsslinks' value=$oView->getRssLinks()}]
-    [{assign var="blFullwidth" value=$oViewConf->getViewThemeParam('blFullwidthLayout')}]
 
-    [{if $oView->getClassName()=='start' && $oView->getBanners() && !empty($oView->getBanners())}]
+    [{if $oView->getBanners() && !empty($oView->getBanners())}]
         [{include file="widget/promoslider.tpl"}]
     [{/if}]
 
-aaaaaaaaaaaaaaaaa
     [{block name="start_welcome_text"}]
         [{oxifcontent ident="oxstartwelcome" object="oCont"}]
             <div class="welcome-teaser">[{$oCont->oxcontents__oxcontent->value}]</div>
         [{/oxifcontent}]
     [{/block}]
-sssssssssssssssssss
-    [{assign var="oTopArticles" value=$oView->getTop5ArticleList()}]
 
     [{block name="start_bargain_articles"}]
         [{assign var="oBargainArticles" value=$oView->getBargainArticleList()}]
         [{if $oBargainArticles && $oBargainArticles->count()}]
-            [{include file="widget/product/list.tpl" type=$oViewConf->getViewThemeParam('sStartPageListDisplayType') head="START_BARGAIN_HEADER"|oxmultilangassign subhead="START_BARGAIN_SUBHEADER"|oxmultilangassign listId="bargainItems" products=$oBargainArticles rsslink=$rsslinks.bargainArticles rssId="rssBargainProducts" showMainLink=true iProductsPerLine=4}]
+            [{include file="widget/product/list.tpl" type="small" head="START_BARGAIN_HEADER"|oxmultilangassign subhead="START_BARGAIN_SUBHEADER"|oxmultilangassign
+            listId="bargainItems" products=$oBargainArticles rsslink=$rsslinks.bargainArticles rssId="rssBargainProducts" showMainLink=true iProductsPerLine=4}]
         [{/if}]
     [{/block}]
 
@@ -35,17 +32,9 @@ sssssssssssssssssss
         [{/if}]
     [{/block}]
 
-    [{if $oNewestArticles && $oNewestArticles->count() && $oTopArticles && $oTopArticles->count()}]
-        <div class="row">
-            [{if $blFullwidth}]
-                <div class="col-xs-12"><hr></div>
-            [{else}]
-                <hr>
-            [{/if}]
-        </div>
-    [{/if}]
 
     [{block name="start_top_articles"}]
+        [{assign var="oTopArticles" value=$oView->getTop5ArticleList()}]
         [{if $oTopArticles && $oTopArticles->count()}]
             [{include file="widget/product/list.tpl" type=$oViewConf->getViewThemeParam('sStartPageListDisplayType') head="START_TOP_PRODUCTS_HEADER"|oxmultilangassign subhead="START_TOP_PRODUCTS_SUBHEADER"|oxmultilangassign:$oTopArticles->count() listId="topBox" products=$oTopArticles rsslink=$rsslinks.topArticles rssId="rssTopProducts" showMainLink=true iProductsPerLine=4}]
         [{/if}]
